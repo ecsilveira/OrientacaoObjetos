@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.edu.uniritter.exercicioConta.ContaExcecao;
-import br.edu.uniritter.exercicioConta.Enum_FalhaConta;
 import br.edu.uniritter.exercicioConta.Poupanca;
 
 public class PoupancaTest {
@@ -30,9 +29,7 @@ public class PoupancaTest {
 			poupanca.saca(20);
 			assertEquals(80, poupanca.verificaSaldo(), 0.01);
 		} catch (ContaExcecao ce) {
-			if (ce.getFalha() == Enum_FalhaConta.SALDO_INSUFICIENTE) {
-				System.out.println("Saldo insuficiente.");
-			}
+			System.out.println(ce.Mensagem(ce.getFalha()));
 		}
 	}
 
@@ -42,9 +39,7 @@ public class PoupancaTest {
 			poupanca.saca(1000);
 			assertEquals(100, poupanca.verificaSaldo(), 0.01);
 		} catch (ContaExcecao ce) {
-			if (ce.getFalha() == Enum_FalhaConta.SALDO_INSUFICIENTE) {
-				System.out.println("Saldo insuficiente.");
-			}
+			System.out.println(ce.Mensagem(ce.getFalha()));
 		}
 	}
 

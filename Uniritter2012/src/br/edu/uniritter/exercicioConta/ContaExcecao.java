@@ -11,5 +11,14 @@ public class ContaExcecao extends Exception{
 	public Enum_FalhaConta getFalha() {
 		return falha;
 	}
+	
+	public String Mensagem(Enum_FalhaConta falha){
+		switch (falha) {
+		case SALDO_INSUFICIENTE:
+			return "Saldo insuficiente para saque.";
+		default:
+			return "Falha desconhecida.";
+		}
+	}
 
 }

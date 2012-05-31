@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import br.edu.uniritter.exercicioConta.Conta;
 import br.edu.uniritter.exercicioConta.ContaExcecao;
-import br.edu.uniritter.exercicioConta.Enum_FalhaConta;
 
 public class ContaTest {
 
@@ -30,9 +29,7 @@ public class ContaTest {
 			conta.saca(20);
 			assertEquals(80, conta.verificaSaldo(), 0.01);
 		} catch (ContaExcecao ce) {
-			if (ce.getFalha() == Enum_FalhaConta.SALDO_INSUFICIENTE) {
-				System.out.println("Saldo insuficiente.");				
-			}
+			System.out.println(ce.Mensagem(ce.getFalha()));
 		}
 	}
 
@@ -42,9 +39,7 @@ public class ContaTest {
 			conta.saca(1000);	
 			assertEquals(100, conta.verificaSaldo(), 0.01);
 		} catch (ContaExcecao ce) {
-			if (ce.getFalha() == Enum_FalhaConta.SALDO_INSUFICIENTE) {
-				System.out.println("Saldo insuficiente.");				
-			}
+			System.out.println(ce.Mensagem(ce.getFalha()));
 		}
 	}
 
