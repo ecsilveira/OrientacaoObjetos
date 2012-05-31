@@ -2,6 +2,11 @@ package br.edu.uniritter.exercicioConta;
 
 public class ContaExcecao extends Exception{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ContaExcecao(Enum_FalhaConta falha) {
 		this.falha = falha;
 	}
