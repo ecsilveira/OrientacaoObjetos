@@ -6,11 +6,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.edu.uniritter.exercicioConta.ContaCorrente;
+import br.edu.uniritter.exercicioConta.ContaExcecao;
+import br.edu.uniritter.exercicioConta.Enum_FalhaConta;
 
 public class ContaCorrenteTest {
 
 	ContaCorrente contaCorrente;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		contaCorrente = new ContaCorrente(1, 100);
@@ -23,15 +25,28 @@ public class ContaCorrenteTest {
 	}
 
 	@Test
-	public void testSaca() {
-		contaCorrente.saca(20);
-		assertEquals(80, contaCorrente.verificaSaldo(), 0.01);
+	public void testSaca() throws ContaExcecao {
+		try {
+			contaCorrente.saca(20);
+			assertEquals(80, contaCorrente.verificaSaldo(), 0.01);
+		} catch (ContaExcecao ce) {
+			if (ce.getFalha() == Enum_FalhaConta.SALDO_INSUFICIENTE) {
+				System.out.println("Saldo insuficiente.");
+			}
+		}
 	}
 
 	@Test
-	public void testSacaDemais() {
-		contaCorrente.saca(1000);
-		assertEquals(100, contaCorrente.verificaSaldo(), 0.01);
+	public void testSacaDemais() throws ContaExcecao {
+		try {
+			contaCorrente.saca(1000);
+			assertEquals(100, contaCorrente.verificaSaldo(), 0.01);
+
+		} catch (ContaExcecao ce) {
+			if (ce.getFalha() == Enum_FalhaConta.SALDO_INSUFICIENTE) {
+				System.out.println("Saldo insuficiente.");
+			}
+		}
 	}
 
 	@Test

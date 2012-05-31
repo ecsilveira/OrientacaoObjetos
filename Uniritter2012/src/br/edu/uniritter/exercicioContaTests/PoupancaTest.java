@@ -5,12 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.edu.uniritter.exercicioConta.ContaExcecao;
+import br.edu.uniritter.exercicioConta.Enum_FalhaConta;
 import br.edu.uniritter.exercicioConta.Poupanca;
 
 public class PoupancaTest {
 
 	Poupanca poupanca;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		poupanca = new Poupanca(2);
@@ -23,15 +25,27 @@ public class PoupancaTest {
 	}
 
 	@Test
-	public void testSaca() {
-		poupanca.saca(20);
-		assertEquals(80, poupanca.verificaSaldo(), 0.01);
+	public void testSaca() throws ContaExcecao {
+		try {
+			poupanca.saca(20);
+			assertEquals(80, poupanca.verificaSaldo(), 0.01);
+		} catch (ContaExcecao ce) {
+			if (ce.getFalha() == Enum_FalhaConta.SALDO_INSUFICIENTE) {
+				System.out.println("Saldo insuficiente.");
+			}
+		}
 	}
 
 	@Test
-	public void testSacaDemais() {
-		poupanca.saca(1000);
-		assertEquals(100, poupanca.verificaSaldo(), 0.01);
+	public void testSacaDemais() throws ContaExcecao {
+		try {
+			poupanca.saca(1000);
+			assertEquals(100, poupanca.verificaSaldo(), 0.01);
+		} catch (ContaExcecao ce) {
+			if (ce.getFalha() == Enum_FalhaConta.SALDO_INSUFICIENTE) {
+				System.out.println("Saldo insuficiente.");
+			}
+		}
 	}
 
 	@Test
