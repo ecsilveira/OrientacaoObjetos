@@ -6,6 +6,9 @@ public class Classificacao {
 	private int pontos;
 	private int golsPros;
 	private int golsContra;
+	private int vitorias;
+	private int derrotas;
+	private int empates;
 	
 	public Classificacao(Equipe equipe) {
 		this.equipe = equipe;
@@ -45,6 +48,32 @@ public class Classificacao {
 	
 	public int getSaldoGols() {
 		return this.golsPros - this.golsContra;
+	}
+
+	public int getVitorias() {
+		return vitorias;
+	}
+
+	public void addVitorias() {
+		this.vitorias++;
+		this.addPontos(3);
+	}
+
+	public int getDerrotas() {
+		return derrotas;
+	}
+
+	public void addDerrotas() {
+		this.derrotas++;
+	}
+
+	public int getEmpates() {
+		return empates;
+	}
+
+	public void addEmpates() {
+		this.empates++;
+		this.addPontos(1);
 	}
 	
 }

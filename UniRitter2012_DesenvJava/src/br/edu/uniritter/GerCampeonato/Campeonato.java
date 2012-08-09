@@ -60,23 +60,27 @@ public class Campeonato {
 				classificado.addGolsContra(partida.getPlacar()[1]);
 				
 				if (partida.getPlacar()[0] == partida.getPlacar()[1])
-					classificado.addPontos(1);
+					classificado.addEmpates();
 				else
 					if (partida.getPlacar()[0] > partida.getPlacar()[1])
-						classificado.addPontos(3);
+						classificado.addVitorias();
+					else
+						classificado.addDerrotas();
 			}
 			else
 			{
 				if (classificado.getEquipe().equals(partida.getVisitante()))
 				{
-					classificado.addGolsPros(partida.getPlacar()[0]);
-					classificado.addGolsContra(partida.getPlacar()[1]);
+					classificado.addGolsPros(partida.getPlacar()[1]);
+					classificado.addGolsContra(partida.getPlacar()[0]);
 					
 					if (partida.getPlacar()[0] == partida.getPlacar()[1])
-						classificado.addPontos(1);
+						classificado.addEmpates();
 					else
-						if (partida.getPlacar()[0] > partida.getPlacar()[1])
-							classificado.addPontos(3);
+						if (partida.getPlacar()[1] > partida.getPlacar()[0])
+							classificado.addVitorias();
+						else
+							classificado.addDerrotas();
 				}
 			}
 		}		

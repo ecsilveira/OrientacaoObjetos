@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.edu.uniritter.GerCampeonato.Campeonato;
+import br.edu.uniritter.GerCampeonato.Classificacao;
 import br.edu.uniritter.GerCampeonato.Equipe;
 import br.edu.uniritter.GerCampeonato.Partida;
 
@@ -85,4 +86,54 @@ public class CampeonatoTest {
 		assertFalse(p1.equals(partida1) && p2.equals(partida2));
 	}
 	
+	@Test
+	public void testGetClassificacao()
+	{
+		campeonato.GerarCalendario();
+		partidas = campeonato.getPartidas();
+		
+		int[] placar1 = new int[2];
+		placar1[0] = 1;
+		placar1[1] = 2;
+		Partida p1 = partidas.get(0);
+		p1.setPlacar(campeonato, placar1);
+
+		int[] placar2 = new int[2];
+		placar2[0] = 1;
+		placar2[1] = 3;
+		Partida p2 = partidas.get(1);
+		p2.setPlacar(campeonato, placar2);
+
+		boolean validaClassificacao = false;
+		ArrayList<Classificacao> classificados = campeonato.getClassificados();
+		
+		for (Classificacao classificado : classificados) {
+			if (classificado.getEquipe().getNome() == "Equipe1")
+			{
+				validaClassificacao = classificado.getPontos() == 3;
+				validaClassificacao = classificado.getGolsPros() == 4;
+				validaClassificacao = classificado.getGolsContra() == 3;
+				validaClassificacao = classificado.getSaldoGols() == 1;
+				validaClassificacao = classificado.getVitorias() == 1;
+				validaClassificacao = classificado.getDerrotas() == 1;
+				validaClassificacao = classificado.getEmpates() == 0;
+			}
+			else
+			{
+				if (classificado.getEquipe().getNome() == "Equipe2")
+				{
+					validaClassificacao = classificado.getPontos() == 3;
+					validaClassificacao = classificado.getGolsPros() == 3;
+					validaClassificacao = classificado.getGolsContra() == 4;
+					validaClassificacao = classificado.getSaldoGols() == -1;
+					validaClassificacao = classificado.getVitorias() == 1;
+					validaClassificacao = classificado.getDerrotas() == 1;
+					validaClassificacao = classificado.getEmpates() == 0;
+				}
+				
+			}
+		}
+		
+		assertTrue(validaClassificacao);
+	}
 }
